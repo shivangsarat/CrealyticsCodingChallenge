@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import TextField from '@mui/material/TextField';
 
@@ -14,8 +14,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import '../css/filters.scss'
 
 export default function Filters(props) {
-    // const [gender, setGender] = useState(null);
-    // const [priceSwitch, setPriceSwitch] = useState(false);
 
     const handleChange = (event) => {
         props.filterByGender(event.target.value)
@@ -25,7 +23,6 @@ export default function Filters(props) {
         props.filterByDiscount(!props.price)
     }
 
-    const label = { inputProps: { 'aria-label': 'Price' } };
     return(
         <div className={props.className}>
             <TextField label="Product" onChange={(e) => props.productSearch(e)} className="searchBox" />
@@ -41,9 +38,9 @@ export default function Filters(props) {
                         label="Gender"
                         onChange={handleChange}
                         >
-                            <MenuItem value={'male'}>Male</MenuItem>
-                            <MenuItem value={'female'}>Female</MenuItem>
-                            <MenuItem value={'unisex'}>Unisex</MenuItem>
+                            <MenuItem value={'male'} id="filter-value-male">Male</MenuItem>
+                            <MenuItem value={'female'} id="filter-value-female">Female</MenuItem>
+                            <MenuItem value={'unisex'} id="filter-value-unisex">Unisex</MenuItem>
                         </Select>
                     </FormControl>
                 </div>

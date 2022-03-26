@@ -21,5 +21,5 @@ export default function AsyncImage(props) {
             <img src={props.src} alt={props.alt} className={props.className} />
         );
     }
-    return (<img src={""} alt={props.alt} className={"broken"} />);
+    return (<img src={""} alt={props.alt} className={props.className} />);
 };

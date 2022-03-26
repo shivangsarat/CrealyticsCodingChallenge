@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Fragment, useCallback} from "react";
+import React, {useState, useEffect, Fragment} from "react";
 
 import ProductCard from "./ProductCard";
 import ProductDetail from "../ProductDetail";
@@ -14,7 +14,7 @@ export default function ProductList (props) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
-    const [itemLength, setItemLength] = useState(0);
+    // const [itemLength, setItemLength] = useState(0);
     const [endtLength, setEndtLength] = useState(100);
     const [filteredItems, setFilteredItems] = useState([]);
     const [open, setOpen] = useState(false);
@@ -32,7 +32,7 @@ export default function ProductList (props) {
             setItems(result);
             setFilteredItems(result)
             setIsLoaded(true);
-            setItemLength(result.length)
+            // setItemLength(result.length)
           }).catch((err) => {
             console.error(err)
               setError(err);
@@ -42,13 +42,13 @@ export default function ProductList (props) {
     useEffect(() => {
         const filterSearchBox = items.filter(
             suggestion => {
-                return suggestion.title.toLowerCase().indexOf(searchItem.toLowerCase()) > -1
+                return suggestion.title && suggestion.title.toLowerCase().indexOf(searchItem.toLowerCase()) > -1
             }
         )
 
         let filteredGender = items.filter(
             suggestion => {
-                return gender !== "" ? suggestion && suggestion.gender == gender.toLowerCase() : suggestion
+                return gender !== "" ? suggestion && suggestion.gender === gender.toLowerCase() : suggestion
             }
         )
 
@@ -68,10 +68,11 @@ export default function ProductList (props) {
         let counter = {}
 
         all.map(function(ary, n) {
-            ary.map(function(obj) {
+            return ary.map(function(obj) {
                 var key = JSON.stringify(obj);
                 objects[key] = obj;
                 counter[key] = (counter[key] || 0) | (1 << n);
+                return;
             })
         })
 
@@ -79,6 +80,7 @@ export default function ProductList (props) {
         Object.keys(counter).map(function(key) {
             if(counter[key] == (1 << all.length) - 1)
                 intersection.push(objects[key]);
+                return
         })
 
         setFilteredItems(intersection)
@@ -129,7 +131,7 @@ export default function ProductList (props) {
                 {/* <TextField label="Product" onChange={(e) => productSearch(e)} className="searchBox" /> */}
                 <Filters productSearch={productSearch} className="filter-selectors" filterByGender={filterByGender} filterByDiscount={filterByDiscount} gender={gender} price={price} />
                 <ProductCard data={filteredItems.length > 0 ? filteredItems.slice(0, endtLength) : items.slice(0, endtLength)} onClick={handleOpen} />
-                {endtLength < filteredItems.length && <Button variant="outlined" onClick={handleLoadMore}>Load More</Button>}
+                {endtLength < filteredItems.length && <Button variant="outlined" className="loaad-more-button" onClick={handleLoadMore}>Load More</Button>}
                 {open && <ProductDetail product={product} handleClose={handleClose} open={open} />}
             </div>
         )
