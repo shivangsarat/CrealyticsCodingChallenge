@@ -1,0 +1,17 @@
+// .filter-menu-items{
+    
+// }
+
+.additional-filters {
+    // display: inline;
+    .filter-gender {
+        width: 60% !important;
+        float: left;
+        margin-left: 5%;
+        margin-bottom: 20px;
+    }
+    .filter-price {
+        float: right;
+        margin-right: 200px;
+    }
+}
