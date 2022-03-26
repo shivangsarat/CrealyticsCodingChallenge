@@ -12,7 +12,7 @@ export const getJsonFromCSV = csv => {
         for(var j=0;j<headers.length;j++){
             if (j < 6) {
                 if (currentline[3] === 'male' || currentline[3] === 'female' || currentline[3] === 'unisex') {
-                    obj[headers[0]] = currentline[0].replace('"', '').replace("s.", "") + currentline[1].replace('"', '');
+                    obj[headers[0]] = currentline[0].replace('"', '') + currentline[1].replace('"', '');
                     obj[headers[j]] = currentline[j+1];
                 } else if (currentline[2] === 'male' || currentline[2] === 'female' || currentline[2] === 'unisex') {
                     obj[headers[j]] = currentline[j];
