@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### Versions
 
 Node: `v16.13.0`
-npm: `8.1.0`
+npm: `8.5.3`
 
 In the project directory, you can run:
 
