@@ -37,7 +37,8 @@ export default function ProductCard (props) {
                                         </Typography>
                                         <Typography variant="body2" color="text.secondary"className='product-sale_price'>
                                         <b>Selling Price:</b> {item.sale_price}
-                                        </Typography><Typography variant="body2" color="text.secondary"className='product-price'>
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary"className='product-price'>
                                         <b>Product Price:</b>{item.price}
                                         </Typography>
                                     </CardContent>

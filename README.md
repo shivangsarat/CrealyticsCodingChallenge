@@ -165,11 +165,21 @@ npm i puppeteer -s
 - #### Fetching CSV File
 
     - Fetching of CSV file is done in [src/ProductList/index.js line 27-40](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/index.js#L27-L40) in useEffect with empty array as dependency immitating componentDidMount.
-    - To fetch from CSV we use ```fetch("./products.csv")``` function to get the result and convert it to text using ```.text()`` function.
+    - To fetch from CSV we use ```fetch("./products.csv")``` function to get the result and convert it to text using ```.text()``` function.
     - Once the data is fetched, it is paseed to [Plugins/JsonFromCSV.js](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/Plugins/JsonFromCSV.js) where the data is seperated in form of array and mapped together to form an array of objects.
-    ***Note: in JsonFromCSV between [Line 14 - Line 16](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/Plugins/JsonFromCSV.js#L14-L16) it is checked if in parsing data gender is shifted to a index below and handled.***
-    ***Note: in JsonFromCSV between [Line 17 - Line 19](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/Plugins/JsonFromCSV.js#L17-L19) it is checked if gender is in the scope ("male", "female", "unisex"). If not, then data is not entered into final product listing.***
+        - ***Note: in JsonFromCSV between [Line 14 - Line 16](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/Plugins/JsonFromCSV.js#L14-L16) it is checked if in parsing data gender is shifted to a index below and handled.***
+        - ***Note: in JsonFromCSV between [Line 17 - Line 19](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/Plugins/JsonFromCSV.js#L17-L19) it is checked if gender is in the scope ("male", "female", "unisex"). If not, then data is not entered into final product listing.***
+        ```
+        if (currentline[3] === 'male' || currentline[3] === 'female' || currentline[3] === 'unisex') {
+            obj[headers[0]] = currentline[0].replace('"', '') + currentline[1].replace('"', '');
+            obj[headers[j]] = currentline[j+1];
+        } else if (currentline[2] === 'male' || currentline[2] === 'female' || currentline[2] === 'unisex') {
+            obj[headers[j]] = currentline[j];
+        }
+        ```
     - After recieving the data in desired format (JSON), data is added to state in items list and loading message is turned off.
 
 - #### Rendering Products
-    - Products are rendered using a component [src/ProductList/ProductCard.js](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/ProductCard.js) in [Line 135 0f src/ProductList/index.js](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/index.js#L135)
+    - Products are rendered using a component [src/ProductList/ProductCard.js](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/ProductCard.js) which is called in [Line 135 0f src/ProductList/index.js](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/index.js#L135)
+    - In [src/ProductList/ProductCard.js Line 15 to Line 51](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/ProductCard.js#L15-L51) data is mapped and a product card is generated contaning [Async Image](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/ProductCard.js#L27), [Title](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/ProductCard.js#L29-L31), [Gender](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/ProductCard.js#L32-L34), [GTIN](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/ProductCard.js#L35-L37), [Sell Price](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/ProductCard.js#L38-L40) and [Price](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/ProductCard.js#L41-L43) of the Product
+    - On Click of card a callback funtion of [onClick](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/ProductCard.js#L18) is called tht passes an argument of product json which in turn is responsible for opening modal with additional images of product
