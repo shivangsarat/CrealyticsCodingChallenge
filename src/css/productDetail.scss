@@ -4,7 +4,7 @@
     background: #fff;
     width: 50%;
     height: auto;
-    
+    display: block !important;
 }
 
 .close-button{
@@ -17,8 +17,19 @@
     width: auto;
     height: auto;
     display: block;
+    margin-bottom: 10px;
 }
 
 .css-17h8wlr {
     padding: 40px !important;
+}
+
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+
+.modal-content{
+    height: 60vh;
+    overflow-y: auto;
 }

@@ -31,6 +31,7 @@ export default function ProductDetails (props) {
                     onClose={props.handleClose}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
+                    className="modal-dialog"
                 >
                     <Box sx={style}>
                         <span onClick={props.handleClose} className="close-button"> <CloseIcon sx={{fontSize: 30}} /></span>
@@ -40,9 +41,11 @@ export default function ProductDetails (props) {
                         <Typography gutterBottom variant="h6" component="div" className='product-title'>
                             {props.product.gtin}
                         </Typography>
-                        {
-                            props.product && props.product.additional_image_link && props.product.additional_image_link.length ? props.product.additional_image_link.map((src,index) => <AsyncImage className="product-additional-image" src={src} alt={props.product && props.product.title ?  `${props.product.title}_${props.product.gtin}_${index}` : ""} loading="lazy" />) : <Typography gutterBottom variant="h4" component="div" className='product-title'>No Image to display</Typography>
-                        }
+                        <div className="modal-content">
+                            {
+                                props.product && props.product.additional_image_link && props.product.additional_image_link.length ? props.product.additional_image_link.map((src,index) => <AsyncImage className="product-additional-image" src={src} alt={props.product && props.product.title ?  `${props.product.title}_${props.product.gtin}_${index}` : ""} loading="lazy" />) : <Typography gutterBottom variant="h4" component="div" className='product-title'>No Image to display</Typography>
+                            }
+                        </div>
                         
                     </Box>
                 </Modal>
