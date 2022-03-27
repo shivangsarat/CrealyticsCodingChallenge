@@ -41,7 +41,7 @@ export default function ProductList (props) {
     useEffect(() => {
         const filterSearchBox = items.filter(
             suggestion => {
-                return suggestion.title && suggestion.title.toLowerCase().indexOf(searchItem.toLowerCase()) > -1
+                return suggestion.title && suggestion.title.toLowerCase().indexOf(searchItem.toLowerCase()) > -1 || suggestion.gtin && suggestion.gtin.toLowerCase().indexOf(searchItem.toLowerCase()) > -1
             }
         )
 
