@@ -267,4 +267,5 @@ npm i puppeteer -s
 * In case of No filter/Start case, all the products will be visible.
 * In case of no product available to match the filters, a message of `No products to Display` will be displayed.
 * This project is currently made on the given CSV data with assumption of no change in key name and data structure is consistent throughout the project.
+* The product list design is responsive. in case of desktop, 4 products will be displayed in a grid, while in case of mobile only 2 products willbe displayed.
 ---
