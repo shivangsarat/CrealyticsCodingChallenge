@@ -18,7 +18,7 @@ export default function AsyncImage(props) {
     }, [props.src]);
     if (loadedSrc === props.src) {
         return (
-            <img src={props.src} alt={props.alt} className={props.className} />
+            <img src={loadedSrc} alt={props.alt} className={props.className} />
         );
     }
     return (<img src={""} alt={props.alt} className={props.className} />);
