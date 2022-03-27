@@ -138,3 +138,30 @@ describe('Product List checking basic rendering of elements', () => {
 
     afterAll(() => browser.close());
 })
+
+describe('Product List Checking Functionality', () => {
+    let browser;
+    let page;
+
+    beforeAll(async () => {
+        browser = await puppeteer.launch();
+        page = await browser.newPage();
+
+        await page.goto("http://localhost:3000");
+        await page.waitForSelector(".searchBox");
+        
+        await page.click(".searchBox")
+      });
+    
+    it("Checks for No product message if no products maches to applied applied filter", async () => {
+        await page.click(".searchBox")
+        await page.type(".searchBox", "gde")
+
+        // await page.waitForSelector(".paper-No-products");
+        const noProductMessage = await page.$eval(".paper-No-products", (e) => e.textContent);
+        expect(noProductMessage).toContain('No products to Display')
+    });
+    
+
+    afterAll(() => browser.close());
+})

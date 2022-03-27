@@ -259,3 +259,12 @@ npm i puppeteer -s
         }
     }
     ```
+
+---
+**Note/Comments/Assumptions**
+
+* In case of No filter/Start case, all the products will be visible.
+* In case of no product available to match the filters, a message of `No products to Display` will be displayed.
+* For adding extra props of openModal on Link click comment line 35 and uncomment line 36.
+* This project is currently made on the given CSV data with assumption of no change in key name and data structure is consistent throughout the project.
+---

@@ -7,6 +7,7 @@ import Filters from "../Filters";
 import { getJsonFromCSV } from "../Plugins/JsonFromCSV";
 
 import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
 
 import "../css/productList.scss"
 
@@ -132,7 +133,7 @@ export default function ProductList (props) {
             <div className="ProductListBody">
                 {/* <TextField label="Product" onChange={(e) => productSearch(e)} className="searchBox" /> */}
                 <Filters productSearch={productSearch} className="filter-selectors" filterByGender={filterByGender} filterByDiscount={filterByDiscount} gender={gender} price={price} />
-                <ProductCard data={filteredItems.length > 0 ? filteredItems.slice(0, endtLength) : items.slice(0, endtLength)} onClick={handleOpen} />
+                {filteredItems.length > 0 ? <ProductCard data={ filteredItems.slice(0, endtLength)} onClick={handleOpen} /> : <Paper className="paper-No-products">No products to Display</Paper>}
                 {endtLength < filteredItems.length && <Button variant="outlined" className="loaad-more-button" onClick={handleLoadMore}>Load More</Button>}
                 {open && <ProductDetail product={product} handleClose={handleClose} open={open} />}
             </div>
