@@ -81,13 +81,6 @@ pm2 stop CrealyticsCodingChallenge
 pm2 delete CrealyticsCodingChallenge
 ```
 
-<!-- **Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it. -->
 
 ## __Documentation__
 
@@ -167,3 +160,16 @@ npm i puppeteer -s
     - Checks product rendered on second keypress element and product different from previous entry
     - Checks for product rendered on price switch that sale price is less than product price
     - Checks the product for gender matching to applied filter
+
+### WorkFlow
+- #### Fetching CSV File
+
+    - Fetching of CSV file is done in [src/ProductList/index.js line 27-40](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/index.js#L27-L40) in useEffect with empty array as dependency immitating componentDidMount.
+    - To fetch from CSV we use ```fetch("./products.csv")``` function to get the result and convert it to text using ```.text()`` function.
+    - Once the data is fetched, it is paseed to [Plugins/JsonFromCSV.js](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/Plugins/JsonFromCSV.js) where the data is seperated in form of array and mapped together to form an array of objects.
+    ***Note: in JsonFromCSV between [Line 14 - Line 16](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/Plugins/JsonFromCSV.js#L14-L16) it is checked if in parsing data gender is shifted to a index below and handled.***
+    ***Note: in JsonFromCSV between [Line 17 - Line 19](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/Plugins/JsonFromCSV.js#L17-L19) it is checked if gender is in the scope ("male", "female", "unisex"). If not, then data is not entered into final product listing.***
+    - After recieving the data in desired format (JSON), data is added to state in items list and loading message is turned off.
+
+- #### Rendering Products
+    - Products are rendered using a component [src/ProductList/ProductCard.js](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/ProductCard.js) in [Line 135 0f src/ProductList/index.js](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/index.js#L135)

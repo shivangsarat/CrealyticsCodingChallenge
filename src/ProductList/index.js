@@ -30,7 +30,6 @@ export default function ProductList (props) {
           }).then(csv => {
             let result = getJsonFromCSV(csv);
             setItems(result);
-            setFilteredItems(result)
             setIsLoaded(true);
             // setItemLength(result.length)
           }).catch((err) => {
@@ -59,28 +58,31 @@ export default function ProductList (props) {
         )
 
         handleIntersection(filterSearchBox, filteredGender, filterPrice)
-    }, [searchItem, gender, price, items])
+    }, [
+        searchItem,
+        gender,
+        price,
+        items,
+    ])
 
-    const handleIntersection = (filterSearchBox, filteredGender, filterPrice) => {
-        let all = [filterSearchBox, filteredGender, filterPrice]
+    const handleIntersection = (...args) => {
+        let all = args;
 
         let objects = {}
         let counter = {}
 
-        all.map(function(ary, n) {
-            return ary.map(function(obj) {
+        all.forEach(function(ary, n) {
+            ary.forEach(function(obj) {
                 var key = JSON.stringify(obj);
                 objects[key] = obj;
                 counter[key] = (counter[key] || 0) | (1 << n);
-                return;
             })
         })
 
         let intersection = []
-        Object.keys(counter).map(function(key) {
-            if(counter[key] == (1 << all.length) - 1)
+        Object.keys(counter).forEach(function(key) {
+            if(counter[key] === (1 << all.length) - 1)
                 intersection.push(objects[key]);
-                return
         })
 
         setFilteredItems(intersection)
