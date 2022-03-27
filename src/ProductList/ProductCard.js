@@ -14,7 +14,7 @@ export default function ProductCard (props) {
                 {
                     props.data.map((item, index) => {
                         return(
-                            <Grid item xs={3} key={index} className="product-list-card" id={`product-item-${index}`}>
+                            <Grid item xs={6} sm={3} key={index} className="product-list-card" id={`product-item-${index}`}>
                                 <Card sx={{ maxWidth: 345, height: 500 }} onClick={() => props.onClick(item)}>
                                     {/* <CardMedia
                                         component="img"
