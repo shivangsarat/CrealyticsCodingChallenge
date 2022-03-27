@@ -195,8 +195,26 @@ npm i puppeteer -s
     - When the Modal opens, Product Title and and GTIN is displayed along with all the additional images loaded asynchronously.
     - In case of no image url in additional_image_link, a text message will appear stating  `No Image to display`.
 
-- #### Asynchronous loading of Images
-    - This componenet is used for loading images asynchronously.
+- #### Asynchronous Loading and Caching of Images
+    - This componenet is used for loading and caching images asynchronously.
+    - Async Images component is called in [Line 27](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/ProductCard.js#L27) inside `src/ProductList/ProductCard.js` for displaying images in product list card and in [Line 47](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductDetail/index.js#L46) of `src/ProductDetails/index.js` for loading images in Product Details modal.
+    - Async Loading and caching is implemented from [Line 5 to Line 18](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/AsyncImage/index.js#L5-L18) in useEffect hook listning to the changes in the src key of passed props.
+    ```
+    useEffect(() => {
+        setLoadedSrc(null);
+        if (props.src) {
+            const handleLoad = () => {
+                setLoadedSrc(props.src);
+            };
+            const image = new Image();
+            image.addEventListener('load', handleLoad);
+            image.src = props.src;
+            return () => {
+                image.removeEventListener('load', handleLoad);
+            };
+        }
+    }, [props.src]);
+    ```
 
 - ### Filters Function
     - Filters are implemented from [Line 41 - Line 66](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/index.js#L41-L66) in `src/ProductList/index.js` inside useState function listning to state variables `searchItem`, `gender`, `price`, and `items`.
