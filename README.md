@@ -160,6 +160,7 @@ npm i puppeteer -s
     - Checks product rendered on second keypress element and product different from previous entry
     - Checks for product rendered on price switch that sale price is less than product price
     - Checks the product for gender matching to applied filter
+    - Checks for No product message if no products maches to applied applied filter
 
 ### WorkFlow
 **Note: All logical operations are tried to be defined at one place in [src/ProductList/index.js](https://github.com/shivangsarat/CrealyticsCodingChallenge/blob/main/src/ProductList/index.js). While all Other UI Components are broken into different components and actions are performed using callback functions or props.**
