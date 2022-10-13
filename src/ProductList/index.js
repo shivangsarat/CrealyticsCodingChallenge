@@ -66,6 +66,16 @@ export default function ProductList (props) {
         items,
     ])
 
+    const debounce = (fn, delay = 300) => {
+        let timer;
+        return (...args) => {
+            clearTimeout(timer)
+            timer = setTimeout(() => {
+                fn.apply(args)
+            }, delay);
+        }
+    }
+
     const handleIntersection = (...args) => {
         let all = args;
 
@@ -104,7 +114,7 @@ export default function ProductList (props) {
 
     const productSearch = e => {
         const userInput = e.currentTarget.value;
-        setSearchItem(userInput)
+        debounce(setSearchItem(userInput), 500)
     }
 
     const filterByGender = gender => {
